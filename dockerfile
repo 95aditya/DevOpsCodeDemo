@@ -1,4 +1,7 @@
-FROM tomcat:9
-ADD addressbook.war /var/lib/jenkins/workspace/Cicd-project/target
-CMD ["catalina.sh", "run"]
-EXPOSE 8080
+FROM maven:3.8-jdk-11 AS builder
+
+WORKDIR /app
+
+COPY . /app
+
+RUN mvn clean package
